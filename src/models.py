@@ -24,6 +24,21 @@ class Address(Base):
     post_code = Column(String(250), nullable=False)
     person_id = Column(Integer, ForeignKey('person.id'))
     person = relationship(Person)'''
+
+class User(Base):
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)    
+    first_name   = Column(String(100)) 
+    last_name   = Column(String(150)) 
+    user_name   = Column(String(150)) 
+    password = Column(String(150))
+    email = Column(String(150))
+
+class Favorite(Base):
+    __tablename__ = 'favorite'
+    id = Column(Integer, primary_key=True)
+    character_id = Column(Integer, ForeignKey('user.id'))
+
 class Character(Base):
     __tablename__ = 'character'
     id = Column(Integer, primary_key=True)    
@@ -37,12 +52,7 @@ class Character(Base):
     skin_color = Column(String(50))
     created = Column(String(80))
     edited  = Column(String(80))
-
-class Population(Base):
-    __tablename__ = 'population'
-    id = Column(Integer, primary_key=True)
-    character_id = Column(Integer, ForeignKey('character.id'))
-    planet_id = Column(Integer, ForeignKey('planet.id'))
+    character_id = Column(Integer, ForeignKey('planet.id'))
 
 class Planet(Base):
     __tablename__ = 'planet'
@@ -51,17 +61,6 @@ class Planet(Base):
     diameter = Column(Integer)
     climate = Column(String(50))
 
-class Staff(Base):
-    __tablename__ = 'staff'
-    id = Column(Integer, primary_key=True)
-    character_id = Column(Integer, ForeignKey('character.id'))
-    film_id = Column(Integer, ForeignKey('film.id'))
-
-class Film(Base):
-    __tablename__ = 'film'
-    id = Column(Integer, primary_key=True)    
-    title  = Column(String(100))
-    episode_id = Column(Integer)
 
 
 
